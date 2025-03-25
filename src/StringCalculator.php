@@ -3,21 +3,24 @@
 namespace Deg540\StringCalculatorPHP;
 
 
+use Exception;
+
 class StringCalculator
 {
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     function add(string $numbers): int
     {
 
-        if (empty($numbers)) {
+        if (empty($numbers))
+        {
             return 0;
         }
 
         if (str_contains($numbers, '-')) {
             $negativeNumbers = array_filter(explode(',', $numbers), fn($num) => $num < 0);
-            throw new \Exception('Negatives not allowed: ' . implode(',', $negativeNumbers));
+            throw new Exception('Números negativos no permitidos: ' . implode(',', $negativeNumbers));
         }
 
         if (preg_match_all('/\d+/', $numbers, $matches)) {
@@ -30,7 +33,7 @@ class StringCalculator
             $delimiterSection = substr($numbers, 2, strpos($numbers, "\n") - 2);
             $numbers = substr($numbers, strpos($numbers, "\n") + 1);
             $delimiters = [];
-            preg_match_all('/\[(.*?)\]/', $delimiterSection, $delimiters);
+            preg_match_all('/\[(.*?)]/', $delimiterSection, $delimiters);
             if (empty($delimiters[1])) {
                 $delimiters = [$delimiterSection];
             } else {
