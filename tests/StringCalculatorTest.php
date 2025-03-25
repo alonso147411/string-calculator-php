@@ -73,19 +73,25 @@ final class StringCalculatorTest extends TestCase
 
     /**
      * @test
+     * @throws Exception
      */
     public function givenNegativeNumberThrowsException(): void
     {
         $this->expectException(Exception::class);
+        $this->expectExceptionMessage('negativos no soportados -1');
+
         $this->stringCalculator->add('-1');
     }
 
     /**
      * @test
+     * @throws Exception
      */
     public function givenMoreThanOneNegativeNumbersThrowsException(): void
     {
         $this->expectException(Exception::class);
+        $this->expectExceptionMessage('negativos no soportados -1,-2');
+
         $this->stringCalculator->add('1,-1,3,-2,4');
     }
 

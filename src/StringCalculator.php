@@ -19,7 +19,7 @@ class StringCalculator
 
         if (str_contains($numbers, '-')) {
             $negativeNumbers = array_filter(explode(',', $numbers), fn($num) => $num < 0);
-            throw new Exception('Números negativos no permitidos: ' . implode(',', $negativeNumbers));
+            throw new Exception('negativos no soportados ' . implode(',', $negativeNumbers));
         }
 
         if (preg_match_all('/\d+/', $numbers, $matches)) {
@@ -57,7 +57,6 @@ class StringCalculator
         return $numbers;
 
     }
-
 
 
     /**
