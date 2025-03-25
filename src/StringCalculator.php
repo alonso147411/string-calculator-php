@@ -25,9 +25,8 @@ class StringCalculator
 
         if (preg_match_all('/\d+/', $numbers, $matches)) {
             $numbersArray = array_filter($matches[0], fn($num) => $num <= 1000);
-            return array_sum($numbersArray);
+            return $this->getArrayWithSumOfNumbers($numbersArray);
         }
-
 
         if ($numbers[0] == '/' && $numbers[1] == '/') {
             $delimiterSection = substr($numbers, 2, strpos($numbers, "\n") - 2);
@@ -41,9 +40,8 @@ class StringCalculator
             }
             $pattern = '/[' . implode('', array_map('preg_quote', $delimiters)) . ']/';
             $numbersArray = preg_split($pattern, $numbers);
-            return array_sum($numbersArray);
+            return $this->getArrayWithSumOfNumbers($numbersArray);
         }
-
 
         if ($this->getContainsComaInString($numbers) && str_contains($numbers, "\n")) {
             $numbers = str_replace("\n", ',', $numbers);
@@ -53,7 +51,6 @@ class StringCalculator
         if ($this->getContainsComaInString($numbers)) {
             return $this->getSumNumbersSeparatedByComas($numbers);
         }
-
 
         return $numbers;
 
@@ -65,7 +62,7 @@ class StringCalculator
      */
     private function getSumNumbersSeparatedByComas(string $numbers): int|float
     {
-        return array_sum(explode(',', $numbers));
+        return $this->getArrayWithSumOfNumbers(explode(',', $numbers));
     }
 
     /**
@@ -75,6 +72,15 @@ class StringCalculator
     private function getContainsComaInString(string $numbers): bool
     {
         return str_contains($numbers, ',');
+    }
+
+    /**
+     * @param array $numbersArray
+     * @return float|int
+     */
+    private function getArrayWithSumOfNumbers(array $numbersArray): int|float
+    {
+        return array_sum($numbersArray);
     }
 
 
