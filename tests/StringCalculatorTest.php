@@ -78,7 +78,6 @@ final class StringCalculatorTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->stringCalculator->add("-1");
-        $this->expectExceptionMessage('Números negativos no permitidos -1');
     }
 
     /**
@@ -88,7 +87,6 @@ final class StringCalculatorTest extends TestCase
     {
         $this->expectException(Exception::class);
         $this->stringCalculator->add("1,-1,3,-2,4");
-        $this->expectExceptionMessage('Números negativos no permitidos: -1,-2');
     }
 
     /**
