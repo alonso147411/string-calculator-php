@@ -45,12 +45,12 @@ class StringCalculator
         }
 
 
-        if (str_contains($numbers, ',') && str_contains($numbers, "\n")) {
+        if ($this->getContainsComaInString($numbers) && str_contains($numbers, "\n")) {
             $numbers = str_replace("\n", ',', $numbers);
             return $this->getSumNumbersSeparatedByComas($numbers);
         }
 
-        if (str_contains($numbers, ',')) {
+        if ($this->getContainsComaInString($numbers)) {
             return $this->getSumNumbersSeparatedByComas($numbers);
         }
 
@@ -63,9 +63,18 @@ class StringCalculator
      * @param string $numbers
      * @return float|int
      */
-    public function getSumNumbersSeparatedByComas(string $numbers): int|float
+    private function getSumNumbersSeparatedByComas(string $numbers): int|float
     {
         return array_sum(explode(',', $numbers));
+    }
+
+    /**
+     * @param string $numbers
+     * @return bool
+     */
+    private function getContainsComaInString(string $numbers): bool
+    {
+        return str_contains($numbers, ',');
     }
 
 
