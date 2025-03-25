@@ -44,13 +44,13 @@ class StringCalculator
             return $this->getArrayWithSumOfNumbers($numbersArray);
         }
 
-        if ($this->getContainsComaInString($numbers) && str_contains($numbers, '\n')) {
+        if (str_contains($numbers, ',') && str_contains($numbers, '\n')) {
             $numbers = str_replace('\n', ',', $numbers);
 
             return $this->getArrayWithSumOfNumbers(explode(',', $numbers));
         }
 
-        if ($this->getContainsComaInString($numbers)) {
+        if (str_contains($numbers, ',')) {
             return $this->getArrayWithSumOfNumbers(explode(',', $numbers));
         }
 
@@ -59,14 +59,6 @@ class StringCalculator
     }
 
 
-    /**
-     * @param string $numbers
-     * @return bool
-     */
-    private function getContainsComaInString(string $numbers): bool
-    {
-        return str_contains($numbers, ',');
-    }
 
     /**
      * @param array $numbersArray
