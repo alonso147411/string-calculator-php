@@ -28,9 +28,9 @@ class StringCalculator
             return $this->getArrayWithSumOfNumbers($numbersArray);
         }
 
-        if ($numbers[0] == '/' && $numbers[1] == '/') {
-            $delimiterSection = substr($numbers, 2, strpos($numbers, "\n") - 2);
-            $numbers = substr($numbers, strpos($numbers, "\n") + 1);
+        if (str_starts_with('//', $numbers)) {
+            $delimiterSection = substr($numbers, 2, strpos($numbers, '\n') - 2);
+            $numbers = substr($numbers, strpos($numbers, '\n') + 1);
             $delimiters = [];
             preg_match_all('/\[(.*?)]/', $delimiterSection, $delimiters);
             if (empty($delimiters[1])) {
@@ -43,8 +43,8 @@ class StringCalculator
             return $this->getArrayWithSumOfNumbers($numbersArray);
         }
 
-        if ($this->getContainsComaInString($numbers) && str_contains($numbers, "\n")) {
-            $numbers = str_replace("\n", ',', $numbers);
+        if ($this->getContainsComaInString($numbers) && str_contains($numbers, '\n')) {
+            $numbers = str_replace('\n', ',', $numbers);
             return $this->getSumNumbersSeparatedByComas($numbers);
         }
 
